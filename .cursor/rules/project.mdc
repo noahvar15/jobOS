@@ -1,0 +1,246 @@
+---
+description: General development rules for the JobOS project
+alwaysApply: true
+---
+
+# JobOS Development Rules
+
+## Project Purpose
+
+JobOS is a real job search management platform.
+
+The application is intended to be genuinely usable and should be developed with production-quality engineering practices.
+
+The project is also being used to develop the developer's software engineering skills.
+
+## Technology Stack
+
+Frontend:
+
+- React
+- TypeScript
+
+Backend:
+
+- C#
+- ASP.NET Core
+- REST API
+
+Database:
+
+- PostgreSQL
+- Entity Framework Core
+
+Future infrastructure:
+
+- Redis
+- Background workers
+- Docker
+- GitHub Actions
+- Cloud deployment
+
+Do not introduce additional major technologies without discussing why they are needed.
+
+## Development Philosophy
+
+Prefer simple, maintainable solutions over unnecessary complexity.
+
+Do not introduce abstractions, patterns, infrastructure, or dependencies simply because they are commonly used.
+
+Every significant technology should solve a real problem in the application.
+
+## Teaching Requirement
+
+The developer is using this project to learn software engineering.
+
+When implementing something unfamiliar or architecturally significant:
+
+1. Explain what it is.
+2. Explain what problem it solves.
+3. Explain why JobOS needs it.
+4. Explain the important concepts.
+5. Then implement it.
+
+Do not hide important architectural decisions behind generated code.
+
+If a task involves a concept that the developer is likely unfamiliar with, pause and explain the concept before implementing it.
+
+## Code Quality
+
+Prefer:
+
+- Clear code
+- Meaningful names
+- Small focused functions
+- Separation of concerns
+- Dependency injection
+- Testable code
+- Explicit error handling
+- Appropriate validation
+
+Avoid:
+
+- Unnecessary abstractions
+- Giant classes
+- Giant functions
+- Duplicated business logic
+- Hardcoded secrets
+- Dead code
+- Premature optimization
+
+## Backend Rules
+
+Use standard ASP.NET Core conventions.
+
+Keep responsibilities separated between:
+
+- API/controllers
+- Application/business logic
+- Data access
+- Domain models
+
+Do not place significant business logic directly inside controllers.
+
+Use dependency injection where appropriate.
+
+Validate user input at API boundaries.
+
+Return appropriate HTTP status codes.
+
+Do not expose internal exception details to clients.
+
+## Database Rules
+
+Use Entity Framework Core for normal database operations.
+
+Use migrations for schema changes.
+
+Do not modify production database schemas manually when the change should be represented by an EF Core migration.
+
+Use appropriate indexes and relationships.
+
+Avoid loading unnecessary data from the database.
+
+Do not introduce database complexity without a demonstrated need.
+
+## Frontend Rules
+
+Use TypeScript rather than JavaScript for application code.
+
+Prefer reusable React components.
+
+Keep components focused.
+
+Do not put large amounts of business logic directly into UI components.
+
+Keep API communication separate from presentation logic where practical.
+
+Handle:
+
+- Loading states
+- Error states
+- Empty states
+
+## API Rules
+
+Use RESTful conventions.
+
+Use appropriate HTTP methods.
+
+Use consistent response structures.
+
+Validate request data.
+
+Use appropriate HTTP status codes.
+
+Do not expose database entities directly when doing so would create an inappropriate API contract.
+
+## Security
+
+Never commit:
+
+- Passwords
+- API keys
+- OAuth secrets
+- Database credentials
+- Tokens
+- Private keys
+
+Use environment variables or appropriate secret management.
+
+Authentication and authorization must be treated as security boundaries.
+
+Never assume that because a frontend hides something, the backend does not need to validate it.
+
+## Background Processing
+
+Do not introduce background processing until there is a real operation that benefits from it.
+
+When background processing is introduced:
+
+- Jobs should be observable.
+- Failures should be handled.
+- Retries should be deliberate.
+- Jobs should be designed to avoid unintended duplicate effects.
+
+## Redis
+
+Redis should only be introduced when there is a real need for asynchronous job queuing or another clearly justified use case.
+
+Do not add Redis solely to make the project appear more sophisticated.
+
+## Testing
+
+Tests should be added alongside meaningful functionality.
+
+Prioritize testing:
+
+- Business logic
+- API behavior
+- Authentication
+- Authorization
+- Database interactions
+- Important user workflows
+
+Do not create tests that merely increase coverage numbers without testing meaningful behavior.
+
+## Git
+
+Make commits focused and descriptive.
+
+Do not combine unrelated changes into one commit.
+
+Before making a large change, inspect the existing code and understand the current architecture.
+
+Do not rewrite working code unnecessarily.
+
+## Project Documentation
+
+Keep the following documents updated when appropriate:
+
+- docs/PROJECT.md
+- docs/ROADMAP.md
+- docs/DECISIONS.md
+
+If an important architectural decision changes, document it in DECISIONS.md.
+
+If the project direction changes, update PROJECT.md or ROADMAP.md.
+
+## Working Style
+
+Before implementing a substantial feature:
+
+1. Inspect the existing project.
+2. Explain the proposed approach.
+3. Identify important design decisions.
+4. Implement the smallest reasonable version.
+5. Test it.
+6. Explain what was implemented.
+
+Do not build large amounts of functionality without checking that the approach is correct.
+
+## Important Principle
+
+The goal is not to maximize the number of technologies used.
+
+The goal is to build a useful application while gaining genuine experience with professional software engineering practices.
